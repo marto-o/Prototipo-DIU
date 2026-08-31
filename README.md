@@ -10,7 +10,6 @@ cd prototipo-diu/
 ```
 
 ```
-bash
 npm run dev
 ```
 
