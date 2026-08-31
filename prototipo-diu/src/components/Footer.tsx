@@ -24,13 +24,12 @@ export default function Footer() {
         <div className="flex flex-col gap-3">
           <h4 className="text-on-tertiary font-bold mb-2">Contacto</h4>
           <a className="text-on-tertiary-container hover:text-secondary-fixed-dim transition-colors opacity-100 hover:opacity-80" href="#">Contacto</a>
-          <span className="text-on-tertiary-container mt-2">Av. España 1680,<br />Valparaíso, Chile</span>
+          <span className="text-on-tertiary-container mt-2">Av. Federico Sta. María 6090,<br />Viña del Mar, Chile</span>
         </div>
         <div className="flex flex-col gap-3">
           <h4 className="text-on-tertiary font-bold mb-2">Síguenos</h4>
           <div className="flex flex-wrap gap-4">
-            <a className="text-on-tertiary-container hover:text-secondary-fixed-dim transition-colors opacity-100 hover:opacity-80" href="#">Instagram</a>
-            <a className="text-on-tertiary-container hover:text-secondary-fixed-dim transition-colors opacity-100 hover:opacity-80" href="#">LinkedIn</a>
+            <a className="text-on-tertiary-container hover:text-secondary-fixed-dim transition-colors opacity-100 hover:opacity-80" href="https://www.instagram.com/fablab_usm/">Instagram</a>
           </div>
         </div>
         <div className="col-span-1 md:col-span-4 mt-12 pt-8 border-t border-outline-variant/10 text-on-tertiary-container text-xs">

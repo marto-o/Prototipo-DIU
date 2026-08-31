@@ -61,12 +61,6 @@ export default {
         "tertiary-container": "#2d2c2a",
         "on-secondary-fixed": "#001e2e"
       },
-      borderRadius: {
-        "DEFAULT": "0.25rem",
-        "lg": "0.5rem",
-        "xl": "0.75rem",
-        "full": "9999px"
-      },
       spacing: {
         "base": "4px",
         "margin-mobile": "16px",
@@ -75,12 +69,12 @@ export default {
         "section-gap": "80px"
       },
       fontFamily: {
-        "label-caps": ["Hanken Grotesk"],
-        "headline-md": ["Hanken Grotesk"],
-        "display-lg-mobile": ["Hanken Grotesk"],
-        "body-base": ["Hanken Grotesk"],
-        "display-lg": ["Hanken Grotesk"],
-        "body-sm": ["Hanken Grotesk"]
+        "label-caps": ["Hanken Grotesk", "sans-serif"],
+        "headline-md": ["Hanken Grotesk", "sans-serif"],
+        "display-lg-mobile": ["Hanken Grotesk", "sans-serif"],
+        "body-base": ["Hanken Grotesk", "sans-serif"],
+        "display-lg": ["Hanken Grotesk", "sans-serif"],
+        "body-sm": ["Hanken Grotesk", "sans-serif"]
       },
       fontSize: {
         "label-caps": ["12px", { lineHeight: "1", letterSpacing: "0.1em", fontWeight: "700" }],

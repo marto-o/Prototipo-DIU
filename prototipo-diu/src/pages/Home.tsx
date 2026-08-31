@@ -5,6 +5,7 @@ import EquipmentCard from '../components/EquipmentCard';
 import Footer from '../components/Footer';
 
 export default function Home() {
+  // Arreglo de datos para generar las tarjetas de máquinas dinámicamente
   const machines = [
     {
       id: 1,
@@ -36,13 +37,17 @@ export default function Home() {
   ];
 
   return (
-    <div className="bg-surface font-body-base text-on-surface antialiased">
+    <div className="bg-surface font-body-base text-on-surface antialiased selection:bg-secondary selection:text-on-secondary min-h-screen flex flex-col">
       <Navbar />
-      <main>
+      
+      <main className="flex-grow">
         <HeroSection />
         <MissionSection />
+        
+        {/* Sección de Equipamiento */}
         <section className="py-section-gap bg-surface-neutral border-y border-outline-variant/20">
           <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+            
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
               <div>
                 <h2 className="font-headline-md text-headline-md text-ink-dark mb-4">Laboratorios y Equipamiento</h2>
@@ -53,6 +58,7 @@ export default function Home() {
                 <span className="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
               </a>
             </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {machines.map((machine) => (
                 <EquipmentCard 
@@ -66,9 +72,11 @@ export default function Home() {
                 />
               ))}
             </div>
+
           </div>
         </section>
       </main>
+
       <Footer />
     </div>
   );
