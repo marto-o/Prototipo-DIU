@@ -1,4 +1,8 @@
+import { useNavigate } from 'react-router-dom';
+
 export default function HeroSection() {
+  const navigate = useNavigate();
+  
   return (
     <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden border-b border-outline-variant/20">
       {/* <video autoPlay className="absolute inset-0 w-full h-full object-cover opacity-10 grayscale pointer-events-none z-0" loop muted playsInline>
@@ -22,7 +26,15 @@ export default function HeroSection() {
             <p className="text-inverse-primary/80">Ven a materializarla en nuestro laboratorio.</p>
           </div>
           <div className="flex flex-col items-center md:items-end gap-2">
-            <button className="bg-transparent border border-on-primary px-6 py-2 hover:bg-on-primary hover:text-ink-dark transition-colors font-label-caps text-label-caps uppercase">Agendar Visita</button>
+            
+            {/* 2. Añadimos el evento onClick al botón */}
+            <button 
+              onClick={() => navigate('/login')}
+              className="bg-transparent border border-on-primary px-6 py-2 hover:bg-on-primary hover:text-ink-dark transition-colors font-label-caps text-label-caps uppercase"
+            >
+              Agendar Visita
+            </button>
+            
             <span className="text-[10px] text-inverse-primary/60 uppercase tracking-wider">Se requiere iniciar sesión con cuenta institucional UTFSM.</span>
           </div>
         </div>
