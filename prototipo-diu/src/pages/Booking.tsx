@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import BookingSidebar from '../components/BookingSidebar';
 import BookingMachineCard from '../components/BookingMachineCard';
+import SuccessModal from '../components/SuccessModal';
 
 // Datos de las máquinas
 const MACHINES = [
@@ -39,23 +40,29 @@ const TIME_SLOTS_AFTERNOON = [
 ];
 
 export default function Booking() {
-  // ESTADOS (Lo que hace dinámico al prototipo)
+  // ESTADOS
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedMachineId, setSelectedMachineId] = useState<string | null>(null);
   const [selectedTimeId, setSelectedTimeId] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Lógica del calendario (Mes actual dinámico)
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedDate(null);
+    setSelectedMachineId(null);
+    setSelectedTimeId(null);
+  };
+
+  // Lógica del calendario
   const today = new Date();
   const currentMonthName = today.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' }).toUpperCase();
   const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
-  
-  // Generamos un arreglo con los días del mes actual [1, 2, 3, ... 30/31]
   const daysArray = Array.from({ length: daysInMonth }, (_, i) => i + 1);
 
-  // Encuentra la máquina completa basada en el ID seleccionado para mandarla al Sidebar
+  // Extraer datos dinámicos
   const selectedMachine = MACHINES.find(m => m.id === selectedMachineId);
-  // Encuentra el label de la hora
   const selectedTimeLabel = [...TIME_SLOTS_MORNING, ...TIME_SLOTS_AFTERNOON].find(t => t.id === selectedTimeId)?.label || null;
+  const dateText = selectedDate ? selectedDate.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'short' }).replace(',', '') : '';
 
   return (
     <div className="bg-background font-body-base text-body-base text-on-surface min-h-screen flex flex-col">
@@ -73,9 +80,10 @@ export default function Booking() {
 
           <div className="flex flex-col lg:flex-row gap-gutter">
             
+            {/* Columna Izquierda: Formulario */}
             <div className="flex-1 flex flex-col gap-12">
               
-              {/* PASO 1: CALENDARIO DINÁMICO */}
+              {/* PASO 1: CALENDARIO */}
               <section className="flex flex-col gap-6">
                 <div className="flex items-center gap-4 border-b border-outline-variant/20 pb-4">
                   <span className="font-headline-md text-headline-md text-primary">01.</span>
@@ -91,7 +99,6 @@ export default function Booking() {
                       <div key={day} className="font-label-caps text-label-caps text-on-surface-variant mb-2">{day}</div>
                     ))}
                     
-                    {/* Renderizamos los días reales del mes */}
                     {daysArray.map((day) => {
                       const dateObj = new Date(today.getFullYear(), today.getMonth(), day);
                       const isPast = dateObj < new Date(today.setHours(0,0,0,0));
@@ -119,7 +126,7 @@ export default function Booking() {
                 </div>
               </section>
 
-              {/* PASO 2: MÁQUINAS DINÁMICAS */}
+              {/* PASO 2: MÁQUINAS */}
               <section className="flex flex-col gap-6">
                 <div className="flex items-center gap-4 border-b border-outline-variant/20 pb-4">
                   <span className="font-headline-md text-headline-md text-outline-variant">02.</span>
@@ -144,7 +151,7 @@ export default function Booking() {
                 </div>
               </section>
 
-              {/* PASO 3: HORARIOS DINÁMICOS */}
+              {/* PASO 3: HORARIOS */}
               <section className="flex flex-col gap-6">
                 <div className="flex items-center gap-4 border-b border-outline-variant/20 pb-4">
                   <span className="font-headline-md text-headline-md text-outline-variant">03.</span>
@@ -197,11 +204,12 @@ export default function Booking() {
 
             </div>
 
-            {/* Sidebar Conectado al Estado */}
+            {/* Columna Derecha: Sidebar */}
             <BookingSidebar 
               selectedDate={selectedDate}
               selectedMachine={selectedMachine}
               selectedTime={selectedTimeLabel}
+              onConfirmClick={() => setIsModalOpen(true)}
             />
             
           </div>
@@ -209,6 +217,15 @@ export default function Booking() {
       </main>
 
       <Footer />
+
+      {/* Modal */}
+      <SuccessModal 
+        isOpen={isModalOpen}
+        dateText={dateText}
+        machineTitle={selectedMachine?.title || ''}
+        timeLabel={selectedTimeLabel || ''}
+        onClose={handleCloseModal}
+      />
     </div>
   );
 }
