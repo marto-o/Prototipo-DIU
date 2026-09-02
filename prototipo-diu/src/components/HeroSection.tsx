@@ -5,9 +5,9 @@ export default function HeroSection() {
   
   return (
     <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden border-b border-outline-variant/20">
-      {/* <video autoPlay className="absolute inset-0 w-full h-full object-cover opacity-10 grayscale pointer-events-none z-0" loop muted playsInline>
-         <source src="/assets/video/hero-bg.mp4" type="video/mp4" />
-      </video> */}
+      {<video autoPlay className="absolute inset-0 w-full h-full object-cover opacity-10 grayscale pointer-events-none z-0" loop muted playsInline>
+         <source src="../assets/video/Display.mp4" type="video/mp4" />
+      </video>}
       <div className="absolute inset-0 bg-surface/80 z-0"></div>
       <div className="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-gutter text-center py-section-gap">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-surface-neutral border border-outline-variant/30 mb-6">
