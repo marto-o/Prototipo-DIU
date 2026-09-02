@@ -1,6 +1,15 @@
+import { useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 
 export default function Login() {
+  const navigate = useNavigate();
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Redirige directamente a la vista de agendamiento
+    navigate('/reserva'); 
+  };
+
   return (
     <div className="bg-surface font-body-base text-body-base text-on-surface min-h-screen flex flex-col antialiased selection:bg-fab-blue selection:text-white">
       {/* Main Content Area con Patrón Geométrico */}
@@ -32,7 +41,7 @@ export default function Login() {
           </div>
 
           {/* Authentication Form */}
-          <form action="#" className="flex flex-col gap-6" onSubmit={(e) => e.preventDefault()}>
+          <form className="flex flex-col gap-6" onSubmit={handleLogin}>
             <div className="flex flex-col gap-4">
               <button className="w-full bg-fab-blue text-white font-body-base text-body-base font-bold py-3 px-6 rounded-none flex items-center justify-center gap-2 hover:bg-primary-container transition-colors duration-200" type="submit">
                 <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
