@@ -2,10 +2,10 @@ interface BookingSidebarProps {
   selectedDate: Date | null;
   selectedMachine: any | null;
   selectedTime: string | null;
+  onConfirmClick: () => void; // NUEVO: Función para abrir el modal
 }
 
-export default function BookingSidebar({ selectedDate, selectedMachine, selectedTime }: BookingSidebarProps) {
-  // Formatear la fecha a texto (Ej: "Miércoles 6, Mar")
+export default function BookingSidebar({ selectedDate, selectedMachine, selectedTime, onConfirmClick }: BookingSidebarProps) {
   const dateText = selectedDate 
     ? selectedDate.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'short' }).replace(',', '')
     : 'No seleccionado';
@@ -52,6 +52,7 @@ export default function BookingSidebar({ selectedDate, selectedMachine, selected
           <div className="flex flex-col gap-4">
             <button 
               disabled={!selectedDate || !selectedMachine || !selectedTime}
+              onClick={onConfirmClick} // NUEVO: Llamada a la función
               className="w-full py-4 bg-primary text-on-primary font-label-caps text-label-caps hover:bg-fab-blue transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               CONFIRMAR AGENDAMIENTO
