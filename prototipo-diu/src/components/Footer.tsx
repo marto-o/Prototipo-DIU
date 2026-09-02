@@ -19,7 +19,6 @@ export default function Footer() {
         <div className="flex flex-col gap-3">
           <h4 className="text-on-tertiary font-bold mb-2">Explorar</h4>
           <a className="text-on-tertiary-container hover:text-secondary-fixed-dim transition-colors opacity-100 hover:opacity-80" href="#">Equipamiento</a>
-          <a className="text-on-tertiary-container hover:text-secondary-fixed-dim transition-colors opacity-100 hover:opacity-80" href="#">Proyectos</a>
         </div>
         <div className="flex flex-col gap-3">
           <h4 className="text-on-tertiary font-bold mb-2">Contacto</h4>
