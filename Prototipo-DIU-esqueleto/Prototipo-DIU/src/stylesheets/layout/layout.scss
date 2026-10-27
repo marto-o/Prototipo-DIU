@@ -1,0 +1,31 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+
+  &__main {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__page {
+    padding: 20px 24px;
+  }
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+  }
+}
+
+.status-banner {
+  padding: 10px 24px;
+  font-size: 13px;
+  background: #e8f5e9;
+  color: #1b5e20;
+  border-bottom: 1px solid #c8e6c9;
+
+  &--alerta {
+    background: #fdecea;
+    color: #b71c1c;
+    border-bottom-color: #f5c6cb;
+  }
+}

@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+
+@import './layout/index.scss';
+@import './nav-bar/index.scss';
+@import './panel-page/index.scss';
+@import './reservas-page/index.scss';
+@import './proyectos-page/index.scss';
+@import './maquinas-page/index.scss';
+@import './turnos-page/index.scss';
+@import './materiales-page/index.scss';
+
+html, body {
+  padding: 0;
+  margin: 0;
+  background: #f6f7f9;
+  color: #1f2933;
+}
+
+* {
+  font-family: 'Open Sans', sans-serif;
+  box-sizing: border-box;
+}

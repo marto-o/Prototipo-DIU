@@ -1,0 +1,50 @@
+.nav-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 240px;
+  flex-shrink: 0;
+  padding: 16px 12px;
+  background: #14304a;
+
+  &__brand {
+    display: flex;
+    flex-direction: column;
+    padding: 4px 8px 16px;
+  }
+
+  &__brand-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  &__brand-sub {
+    font-size: 12px;
+    color: #9fb3c8;
+  }
+
+  &__link {
+    padding: 10px 12px;
+    border-radius: 6px;
+    color: #d9e2ec;
+    text-decoration: none;
+    font-size: 14px;
+
+    &:hover {
+      background: #1f4468;
+    }
+
+    &--active {
+      background: #2f6fa8;
+      color: #fff;
+      font-weight: 600;
+    }
+  }
+
+  @media (max-width: 800px) {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
