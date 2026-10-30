@@ -69,7 +69,7 @@ export const AppStateProvider = ({ children }) => {
       ...prev,
       [semana]: {
         ...prev[semana],
-        [dia]: { ...prev[semana][dia], [bloque]: ayudante }
+        [dia]: { ...prev[semana]?.[dia], [bloque]: ayudante }
       }
     }))
     setEstadoPublicacion(prev => ({

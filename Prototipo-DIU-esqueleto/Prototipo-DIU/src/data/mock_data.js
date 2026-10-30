@@ -7,12 +7,10 @@ export const HORAS = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:
 
 export const AYUDANTES = [
   'Christian Carvajal',
-  'Camila Rojas',
-  'Ignacio Fuentes',
-  'Josefa Vergara',
-  'Diego Muñoz',
-  'Valentina Soto',
-  'Matías Herrera'
+  'Gianina Almonacid',
+  'Tamara Ramirez',
+  'Kamila Lopez',
+  'Lukas Cordova'
 ]
 
 // estado: 'disponible' | 'ocupada' | 'fuera_de_servicio'
@@ -148,18 +146,18 @@ export const PROYECTOS_INICIALES = [
 // Turnos: { semanaActual | proximaSemana: { [dia]: { manana, tarde } } }
 export const TURNOS_INICIALES = {
   actual: {
-    Lunes: { manana: 'Camila Rojas', tarde: 'Diego Muñoz' },
-    Martes: { manana: 'Ignacio Fuentes', tarde: 'Valentina Soto' },
-    Miércoles: { manana: 'Josefa Vergara', tarde: 'Matías Herrera' },
-    Jueves: { manana: 'Camila Rojas', tarde: 'Josefa Vergara' },
-    Viernes: { manana: 'Diego Muñoz', tarde: 'Ignacio Fuentes' }
+    Lunes: { manana: 'Christian Carvajal', tarde: 'Gianina Almonacid' },
+    Martes: { manana: 'Gianina Almonacid', tarde: 'Kamila Lopez' },
+    Miércoles: { manana: 'Lukas Cordova', tarde: 'Lukas Cordova' },
+    Jueves: { manana: 'Christian Carvajal', tarde: 'Tamara Ramirez' },
+    Viernes: { manana: 'Kamila Lopez', tarde: 'Tamara Ramirez' }
   },
   proxima: {
-    Lunes: { manana: 'Valentina Soto', tarde: 'Camila Rojas' },
-    Martes: { manana: 'Matías Herrera', tarde: 'Josefa Vergara' },
-    Miércoles: { manana: 'Diego Muñoz', tarde: 'Ignacio Fuentes' },
-    Jueves: { manana: 'Ignacio Fuentes', tarde: 'Matías Herrera' },
-    Viernes: { manana: 'Josefa Vergara', tarde: 'Valentina Soto' }
+    Lunes: { manana: 'Tamara Ramirez', tarde: 'Christian Carvajal' },
+    Martes: { manana: 'Lukas Cordova', tarde: 'Gianina Almonacid' },
+    Miércoles: { manana: 'Kamila Lopez', tarde: 'Christian Carvajal' },
+    Jueves: { manana: 'Gianina Almonacid', tarde: 'Lukas Cordova' },
+    Viernes: { manana: 'Tamara Ramirez', tarde: 'Kamila Lopez' }
   }
 }
 

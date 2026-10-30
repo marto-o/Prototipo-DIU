@@ -137,7 +137,7 @@ export const TurnosPage = () => {
           className='turnos-page__btn-publish'
           onClick={() => setModalPublicarOpen(true)}
         >
-          📢 {publicacion.publicado && !publicacion.cambiosSinPublicar ? 'Volver a publicar' : 'Publicar turnos al equipo'}
+          {publicacion.publicado && !publicacion.cambiosSinPublicar ? 'Volver a publicar' : 'Publicar turnos al equipo'}
         </button>
       </div>
 
