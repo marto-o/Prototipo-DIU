@@ -6,6 +6,7 @@ export const DIAS = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes']
 export const HORAS = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00']
 
 export const AYUDANTES = [
+  'Christian Carvajal',
   'Camila Rojas',
   'Ignacio Fuentes',
   'Josefa Vergara',
@@ -165,4 +166,19 @@ export const TURNOS_INICIALES = {
 export const BLOQUES_TURNO = {
   manana: 'Mañana · 09:00 – 13:00',
   tarde: 'Tarde · 14:00 – 19:00'
+}
+
+export const ESTADO_PUBLICACION_INICIAL = {
+  actual: {
+    publicado: true,
+    fechaPublicacion: '26 de octubre, 08:30 hrs',
+    publicadoPor: 'Christian Carvajal',
+    cambiosSinPublicar: false
+  },
+  proxima: {
+    publicado: false,
+    fechaPublicacion: null,
+    publicadoPor: null,
+    cambiosSinPublicar: true
+  }
 }

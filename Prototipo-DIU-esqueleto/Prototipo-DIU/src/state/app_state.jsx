@@ -5,7 +5,8 @@ import {
   MATERIALES_INICIALES,
   RESERVAS_INICIALES,
   PROYECTOS_INICIALES,
-  TURNOS_INICIALES
+  TURNOS_INICIALES,
+  ESTADO_PUBLICACION_INICIAL
 } from '../data/mock_data'
 
 // Estado global del MVP (solo frontend, sin backend).
@@ -21,6 +22,7 @@ export const AppStateProvider = ({ children }) => {
   const [reservas] = useState(RESERVAS_INICIALES)
   const [proyectos, setProyectos] = useState(PROYECTOS_INICIALES)
   const [turnos, setTurnos] = useState(TURNOS_INICIALES)
+  const [estadoPublicacion, setEstadoPublicacion] = useState(ESTADO_PUBLICACION_INICIAL)
 
   // ---- Hipótesis 4: /maquinas ----
   // estado: 'disponible' | 'ocupada' | 'fuera_de_servicio'
@@ -70,6 +72,36 @@ export const AppStateProvider = ({ children }) => {
         [dia]: { ...prev[semana][dia], [bloque]: ayudante }
       }
     }))
+    setEstadoPublicacion(prev => ({
+      ...prev,
+      [semana]: {
+        ...prev[semana],
+        cambiosSinPublicar: true
+      }
+    }))
+  }
+
+  const publicarTurnos = (semana, publicadoPor = 'Christian Carvajal') => {
+    const hoy = new Date()
+    const meses = [
+      'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+      'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
+    ]
+    const diaNum = hoy.getDate()
+    const mesNom = meses[hoy.getMonth()]
+    const hora = String(hoy.getHours()).padStart(2, '0')
+    const min = String(hoy.getMinutes()).padStart(2, '0')
+    const fechaFormateada = `${diaNum} de ${mesNom}, ${hora}:${min} hrs`
+
+    setEstadoPublicacion(prev => ({
+      ...prev,
+      [semana]: {
+        publicado: true,
+        fechaPublicacion: fechaFormateada,
+        publicadoPor,
+        cambiosSinPublicar: false
+      }
+    }))
   }
 
   // ---- Derivados compartidos (los usa el banner del layout y el Panel) ----
@@ -82,12 +114,14 @@ export const AppStateProvider = ({ children }) => {
     reservas,
     proyectos,
     turnos,
+    estadoPublicacion,
     materialesBajos,
     maquinasFueraDeServicio,
     cambiarEstadoMaquina,
     actualizarStock,
     traspasarProyecto,
-    asignarTurno
+    asignarTurno,
+    publicarTurnos
   }
 
   return <AppStateContext.Provider value={value}>{children}</AppStateContext.Provider>
