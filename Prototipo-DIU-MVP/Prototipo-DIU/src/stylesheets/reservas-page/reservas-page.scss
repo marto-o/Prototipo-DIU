@@ -1,3 +1,270 @@
 // Estilos exclusivos de la sección Reservas semanales (BEM: .reservas-page__elemento).
 .reservas-page {
+  &__encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  &__titulo {
+    margin: 0 0 4px;
+    font-size: 24px;
+  }
+
+  &__subtitulo {
+    margin: 0;
+    color: #52606d;
+    font-size: 14px;
+  }
+
+  &__selector {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 12px;
+    color: #52606d;
+
+    select {
+      min-width: 220px;
+      padding: 8px 10px;
+      border: 1px solid #bcccdc;
+      border-radius: 6px;
+      background: #fff;
+      font-size: 14px;
+    }
+  }
+
+  &__activa {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+    margin-bottom: 12px;
+    padding: 10px 14px;
+    border-left: 6px solid #1f6fb2;
+    border-radius: 6px;
+    background: #e3f0fb;
+
+    &--ocupada {
+      border-left-color: #f5a623;
+      background: #fff4e0;
+    }
+
+    &--fuera_de_servicio {
+      border-left-color: #c62828;
+      background: #fdecea;
+    }
+  }
+
+  &__activa-etiqueta {
+    color: #52606d;
+    font-size: 13px;
+  }
+
+  &__activa-nombre {
+    font-size: 18px;
+  }
+
+  &__activa-detalle {
+    color: #52606d;
+    font-size: 13px;
+  }
+
+  &__chip {
+    margin-left: auto;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: #fff;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  &__aviso {
+    margin-bottom: 12px;
+    padding: 10px 14px;
+    border: 1px solid #f5c6cb;
+    border-radius: 6px;
+    background: #fdecea;
+    color: #b71c1c;
+    font-size: 14px;
+  }
+
+  &__exito {
+    margin-bottom: 12px;
+    padding: 10px 14px;
+    border: 1px solid #c8e6c9;
+    border-radius: 6px;
+    background: #e8f5e9;
+    color: #1b5e20;
+    font-size: 14px;
+  }
+
+  &__leyenda {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 8px;
+    font-size: 13px;
+  }
+
+  &__leyenda-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__punto {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+
+    &--libre {
+      background: #c8e6c9;
+    }
+
+    &--reservado {
+      background: #ffe0b2;
+    }
+  }
+
+  &__tabla-contenedor {
+    overflow-x: auto;
+  }
+
+  &__tabla {
+    width: 100%;
+    min-width: 680px;
+    border-collapse: separate;
+    border-spacing: 4px;
+
+    th {
+      padding: 6px;
+      color: #52606d;
+      font-size: 13px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    td {
+      padding: 0;
+    }
+  }
+
+  &__celda {
+    width: 100%;
+    min-height: 46px;
+    padding: 6px;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+
+    &--libre {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    &--reservado {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+      background: #fff1dc;
+      color: #7a4b00;
+      text-align: left;
+    }
+
+    &--seleccionada {
+      border-color: #1f6fb2;
+    }
+
+    &:hover:not(:disabled) {
+      filter: brightness(0.96);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__celda-titulo {
+    font-weight: 600;
+  }
+
+  &__celda-persona {
+    font-size: 11px;
+  }
+
+  &__detalle {
+    margin-top: 16px;
+    padding: 16px;
+    border: 1px solid #d9e2ec;
+    border-radius: 8px;
+    background: #fff;
+
+    p {
+      margin: 4px 0 10px;
+      font-size: 14px;
+    }
+  }
+
+  &__detalle-titulo {
+    margin: 0 0 8px;
+    font-size: 16px;
+  }
+
+  &__campo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 12px;
+    font-size: 13px;
+    color: #52606d;
+
+    input {
+      padding: 8px 10px;
+      border: 1px solid #bcccdc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+  }
+
+  &__acciones {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__boton {
+    padding: 9px 16px;
+    border: 0;
+    border-radius: 6px;
+    background: #1f6fb2;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+
+    &:hover:not(:disabled) {
+      background: #185a93;
+    }
+
+    &:disabled {
+      background: #bcccdc;
+      cursor: not-allowed;
+    }
+
+    &--secundario {
+      border: 1px solid #bcccdc;
+      background: #fff;
+      color: #1f2933;
+
+      &:hover:not(:disabled) {
+        background: #f0f4f8;
+      }
+    }
+  }
 }
