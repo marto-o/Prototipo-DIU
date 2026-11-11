@@ -31,8 +31,8 @@ export const ReservasPage = () => {
     return (nuevas[maquinaId] && nuevas[maquinaId][clave]) || (reservas[maquinaId] && reservas[maquinaId][clave]) || null
   }
 
-  const cambiarMaquina = (e) => {
-    setMaquinaId(e.target.value)
+  const cambiarMaquina = (id) => {
+    setMaquinaId(id)
     setCelda(null)
     setTitulo('')
     setMensaje(null)
@@ -66,22 +66,42 @@ export const ReservasPage = () => {
           <h2 className='reservas-page__titulo'>Reservas semanales</h2>
           <p className='reservas-page__subtitulo'>Semana en curso · lunes a viernes, 09:00 a 19:00</p>
         </div>
-        <label className='reservas-page__selector'>
-          <span>Máquina</span>
-          <select value={maquinaId} onChange={cambiarMaquina} aria-label='Seleccionar máquina'>
-            {maquinas.map(m => (
-              <option key={m.id} value={m.id}>{m.nombre}</option>
-            ))}
-          </select>
-        </label>
       </div>
 
-      {/* Máquina seleccionada, siempre visible (hallazgo del testing: no notaban qué máquina estaban viendo) */}
-      <div className={`reservas-page__activa reservas-page__activa--${maquina.estado}`}>
-        <span className='reservas-page__activa-etiqueta'>Estás viendo:</span>
-        <strong className='reservas-page__activa-nombre'>{maquina.nombre}</strong>
-        <span className='reservas-page__activa-detalle'>{maquina.modelo} · {maquina.sala}</span>
-        <span className='reservas-page__chip'>{ESTADOS[maquina.estado]}</span>
+      {/* Selector de máquinas tipo Tabs/Chips prominentes */}
+      <div className='reservas-page__tabs-maquinas' role='tablist' aria-label='Seleccionar máquina'>
+        {maquinas.map(m => {
+          const activa = m.id === maquinaId
+          return (
+            <button
+              key={m.id}
+              type='button'
+              role='tab'
+              aria-selected={activa}
+              className={`reservas-page__tab-btn ${activa ? 'reservas-page__tab-btn--activa' : ''} reservas-page__tab-btn--${m.estado}`}
+              onClick={() => cambiarMaquina(m.id)}
+            >
+              <span className='reservas-page__tab-nombre'>{m.nombre}</span>
+              <span className={`reservas-page__tab-badge reservas-page__tab-badge--${m.estado}`}>
+                {ESTADOS[m.estado]}
+              </span>
+            </button>
+          )
+        })}
+      </div>
+
+      {/* Indicador visual persistente y prominente (Sticky) */}
+      <div className={`reservas-page__indicador-fijo reservas-page__indicador-fijo--${maquina.estado}`}>
+        <div className='reservas-page__indicador-info'>
+          <span className='reservas-page__indicador-etiqueta'>MÁQUINA CONSULTADA:</span>
+          <strong className='reservas-page__indicador-nombre'>{maquina.nombre}</strong>
+          <span className='reservas-page__indicador-detalle'>{maquina.modelo} · {maquina.sala}</span>
+        </div>
+        <div className='reservas-page__indicador-estado'>
+          <span className={`reservas-page__chip-estado reservas-page__chip-estado--${maquina.estado}`}>
+            ● {ESTADOS[maquina.estado]}
+          </span>
+        </div>
       </div>
 
       {fueraDeServicio && (
