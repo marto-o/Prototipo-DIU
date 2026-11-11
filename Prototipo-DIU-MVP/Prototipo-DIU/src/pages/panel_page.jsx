@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppState } from '../state/app_state'
+import StatusBadge, { claseTarjetaEstado } from '../components/status_badge'
 
 export const PanelPage = () => {
   const navigate = useNavigate()
@@ -131,17 +132,13 @@ export const PanelPage = () => {
             const esFueraServicio = maquina.estado === 'fuera_de_servicio'
 
             return (
-              <div key={maquina.id} className={`panel-page__card panel-page__card--${maquina.estado}`}>
+              <div key={maquina.id} className={`panel-page__card ${claseTarjetaEstado(maquina.estado)}`}>
                 <div className='panel-page__card-header'>
                   <div>
                     <h4 className='panel-page__card-name'>{maquina.nombre}</h4>
                     <p className='panel-page__card-model'>{maquina.modelo} · {maquina.sala}</p>
                   </div>
-                  <span className={`panel-page__badge panel-page__badge--${maquina.estado}`}>
-                    {esDisponible && '● Disponible'}
-                    {esOcupada && '● Ocupada'}
-                    {esFueraServicio && '● Fuera de servicio'}
-                  </span>
+                  <StatusBadge estado={maquina.estado} size='lg' />
                 </div>
 
                 <div className='panel-page__card-body'>

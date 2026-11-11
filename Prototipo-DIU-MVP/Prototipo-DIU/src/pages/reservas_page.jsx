@@ -2,15 +2,7 @@ import React, { useState } from 'react'
 
 import { useAppState } from '../state/app_state'
 import { DIAS, HORAS } from '../data/mock_data'
-
-// Hipótesis 2: ruta /reservas
-// Meta: anticipar y comunicar la disponibilidad antes de que el usuario llegue, evitando esperas.
-
-const ESTADOS = {
-  disponible: 'Disponible',
-  ocupada: 'Ocupada',
-  fuera_de_servicio: 'Fuera de servicio'
-}
+import StatusBadge from '../components/status_badge'
 
 export const ReservasPage = () => {
   const { maquinas, reservas } = useAppState()
@@ -81,7 +73,7 @@ export const ReservasPage = () => {
         <span className='reservas-page__activa-etiqueta'>Estás viendo:</span>
         <strong className='reservas-page__activa-nombre'>{maquina.nombre}</strong>
         <span className='reservas-page__activa-detalle'>{maquina.modelo} · {maquina.sala}</span>
-        <span className='reservas-page__chip'>{ESTADOS[maquina.estado]}</span>
+        <span className='reservas-page__chip'><StatusBadge estado={maquina.estado} size='lg' /></span>
       </div>
 
       {fueraDeServicio && (

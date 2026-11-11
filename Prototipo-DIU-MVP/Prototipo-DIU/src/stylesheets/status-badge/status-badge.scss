@@ -1,0 +1,84 @@
+// Indicador de estado de máquina (componente compartido). BEM: .status-badge / .status-card
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+
+  &--lg {
+    gap: 8px;
+    padding: 6px 14px;
+    font-size: 14px;
+  }
+
+  &__punto {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+
+    .status-badge--lg & {
+      width: 10px;
+      height: 10px;
+    }
+  }
+
+  // Disponible y fuera de servicio: para que "ocupada" sea lo que salta a la vista.
+  &--disponible {
+    background: #e8f5e9;
+    color: #1b5e20;
+  }
+
+  &--fuera_de_servicio {
+    background: #fdecea;
+    color: #b71c1c;
+  }
+
+  // Ocupada: relleno sólido naranja, texto blanco en mayúsculas y punto pulsante.
+  &--ocupada {
+    background: #c2410c;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    box-shadow: 0 0 0 3px rgba(194, 65, 12, 0.22);
+
+    .status-badge__punto {
+      background: #fff;
+      animation: status-badge-pulso 1.4s ease-in-out infinite;
+    }
+  }
+}
+
+// Tarjeta/contenedor de la máquina: el borde y el fondo refuerzan el estado.
+// Se usan dos clases (.status-card.status-card--x) para ganarle a estilos de tarjeta
+// que carguen después y declaren "border:" abreviado (p. ej. .panel-page__card).
+.status-card {
+  &.status-card--ocupada {
+    border-left: 6px solid #c2410c;
+    background: #fff3e6;
+    box-shadow: 0 2px 10px rgba(194, 65, 12, 0.18);
+  }
+
+  &.status-card--disponible {
+    border-left: 6px solid #2e7d32;
+  }
+
+  &.status-card--fuera_de_servicio {
+    border-left: 6px solid #c62828;
+  }
+}
+
+@keyframes status-badge-pulso {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.8); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-badge--ocupada .status-badge__punto {
+    animation: none;
+  }
+}

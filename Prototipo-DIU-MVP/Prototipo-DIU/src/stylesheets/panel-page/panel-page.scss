@@ -185,17 +185,7 @@
         justify-content: space-between;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 
-        &--ocupada {
-            border-top: 4px solid #f59e0b;
-        }
-
-        &--disponible {
-            border-top: 4px solid #10b981;
-        }
-
-        &--fuera_de_servicio {
-            border-top: 4px solid #ef4444;
-        }
+        // El borde y fondo por estado ahora los aplica .status-card (componente compartido)
     }
 
     &__card-header {
@@ -218,27 +208,7 @@
         color: #64748b;
     }
 
-    &__badge {
-        font-size: 11px;
-        font-weight: 600;
-        padding: 2px 8px;
-        border-radius: 12px;
-
-        &--disponible {
-            background: #dcfce7;
-            color: #166534;
-        }
-
-        &--ocupada {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        &--fuera_de_servicio {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-    }
+    // La insignia de estado ahora es el componente compartido <StatusBadge /> (stylesheets/status-badge)
 
     &__card-body {
         font-size: 13px;

@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react'
 import { useAppState } from '../state/app_state'
+import StatusBadge, { claseTarjetaEstado } from '../components/status_badge'
 
 export const MaquinasPage = () => {
     const { maquinas, cambiarEstadoMaquina } = useAppState()
@@ -96,7 +97,7 @@ export const MaquinasPage = () => {
                     return (
                         <div
                             key={maquina.id}
-                            className={`panel-page__card panel-page__card--${maquina.estado}`}
+                            className={`panel-page__card ${claseTarjetaEstado(maquina.estado)}`}
                         >
                             <div className='panel-page__card-header'>
                                 <div>
@@ -109,11 +110,7 @@ export const MaquinasPage = () => {
                                     </p>
                                 </div>
 
-                                <span className={`panel-page__badge panel-page__badge--${maquina.estado}`}>
-                                    {esDisponible && '● Disponible'}
-                                    {esOcupada && '● Ocupada'}
-                                    {esFueraServicio && '● Fuera de servicio'}
-                                </span>
+                                <StatusBadge estado={maquina.estado} size='lg' />
                             </div>
 
                             <div className='panel-page__card-body'>
