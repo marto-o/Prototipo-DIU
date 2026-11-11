@@ -95,6 +95,27 @@ const MaterialCard = ({ material, onGuardar }) => {
         </button>
       </div>
 
+      {material.unidad === 'g' && (
+        <div className='materiales-page__rapidos'>
+          <button
+            type='button'
+            className='materiales-page__boton-rapido'
+            onClick={() => ajustar(500)}
+            aria-label={`Agregar 500 g a ${material.nombre}`}
+          >
+            +500 g
+          </button>
+          <button
+            type='button'
+            className='materiales-page__boton-rapido'
+            onClick={() => ajustar(1000)}
+            aria-label={`Agregar 1 kg a ${material.nombre}`}
+          >
+            +1 kg
+          </button>
+        </div>
+      )}
+
       {!valido && (
         <p className='materiales-page__error'>Ingresa una cantidad válida (número entero, 0 o más).</p>
       )}

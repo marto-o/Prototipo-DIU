@@ -150,6 +150,29 @@
     text-align: center;
   }
 
+  &__rapidos {
+    display: flex;
+    gap: 6px;
+  }
+
+  &__boton-rapido {
+    flex: 1;
+    padding: 6px 10px;
+    border: 1px solid #1f6fb2;
+    border-radius: 6px;
+    background: #f0f7ff;
+    color: #1f6fb2;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      background: #1f6fb2;
+      color: #fff;
+    }
+  }
+
   &__error {
     margin: 0;
     color: #c62828;
