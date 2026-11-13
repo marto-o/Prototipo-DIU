@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { useAppState } from '../state/app_state'
 import { DIAS, HORAS } from '../data/mock_data'
-import StatusBadge from '../components/status_badge'
+import StatusBadge, { ESTADOS_MAQUINA } from '../components/status_badge'
 
 export const ReservasPage = () => {
   const { maquinas, reservas } = useAppState()
@@ -75,7 +75,7 @@ export const ReservasPage = () => {
             >
               <span className='reservas-page__tab-nombre'>{m.nombre}</span>
               <span className={`reservas-page__tab-badge reservas-page__tab-badge--${m.estado}`}>
-                {ESTADOS[m.estado]}
+                {ESTADOS_MAQUINA[m.estado]}
               </span>
             </button>
           )
