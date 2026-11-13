@@ -3,9 +3,46 @@ import { useNavigate } from 'react-router-dom'
 import { useAppState } from '../state/app_state'
 import StatusBadge, { claseTarjetaEstado } from '../components/status_badge'
 
+// Misma clave usada por herramientas_adicionales_page.jsx.
+const HERRAMIENTAS_STORAGE_KEY = 'herramientas_adicionales_v1'
+
+const cargarHerramientasAdicionales = () => {
+  try {
+    const datos = JSON.parse(window.localStorage.getItem(HERRAMIENTAS_STORAGE_KEY) || '[]')
+    if (!Array.isArray(datos)) return []
+    return datos.filter(h => (
+      h && typeof h.id === 'string' && typeof h.nombre === 'string' &&
+      Number.isInteger(h.total) && h.total > 0 &&
+      Number.isInteger(h.disponibles) && h.disponibles >= 0 && h.disponibles <= h.total
+    ))
+  } catch {
+    return []
+  }
+}
+
 export const PanelPage = () => {
   const navigate = useNavigate()
   const { maquinas, materiales, materialesBajos } = useAppState()
+  const [herramientasAdicionales, setHerramientasAdicionales] = useState(cargarHerramientasAdicionales)
+
+  useEffect(() => {
+    const actualizarHerramientas = () => {
+      setHerramientasAdicionales(cargarHerramientasAdicionales())
+    }
+    const actualizarEntrePestanas = (evento) => {
+      if (evento.key === HERRAMIENTAS_STORAGE_KEY) actualizarHerramientas()
+    }
+
+    // Actualiza al modificar herramientas y también al volver a la pestaña.
+    window.addEventListener('herramientas-adicionales-actualizadas', actualizarHerramientas)
+    window.addEventListener('storage', actualizarEntrePestanas)
+    window.addEventListener('focus', actualizarHerramientas)
+    return () => {
+      window.removeEventListener('herramientas-adicionales-actualizadas', actualizarHerramientas)
+      window.removeEventListener('storage', actualizarEntrePestanas)
+      window.removeEventListener('focus', actualizarHerramientas)
+    }
+  }, [])
 
   // Estado para modal "Ver detalle" (para que todo botón sea interactivo)
   const [maquinaSeleccionada, setMaquinaSeleccionada] = useState(null)
@@ -47,7 +84,7 @@ export const PanelPage = () => {
         <div>
           <h2 className='panel-page__title'>Panel de disponibilidad</h2>
           <p className='panel-page__subtitle'>
-            Vista rápida del estado de máquinas y materiales en tiempo real.
+            Vista rápida del estado de máquinas, materiales y herramientas adicionales.
           </p>
         </div>
 
@@ -233,6 +270,86 @@ export const PanelPage = () => {
         </div>
       </div>
 
+      {/* SECCIÓN 3: HERRAMIENTAS ADICIONALES */}
+      <div className='panel-page__section'>
+        <div className='panel-page__section-header'>
+          <h3 className='panel-page__section-title'>HERRAMIENTAS ADICIONALES</h3>
+          <button
+            type='button'
+            className='panel-page__btn-detail'
+            onClick={() => navigate('/herramientas-adicionales')}
+          >
+            Administrar herramientas
+          </button>
+        </div>
+
+        {herramientasAdicionales.length === 0 ? (
+          <p>No hay herramientas adicionales registradas.</p>
+        ) : (
+          <div className='panel-page__materials-grid'>
+            {herramientasAdicionales.map(herramienta => {
+              const ocupadas = herramienta.total - herramienta.disponibles
+              const porcentaje = Math.round((herramienta.disponibles / herramienta.total) * 100)
+              const disponibilidadBaja = herramienta.disponibles > 0 && herramienta.disponibles / herramienta.total <= 0.25
+              // 100 %: disponible; 26-99 %: parcial; 1-25 %: baja; 0 %: no disponible.
+              const estado = herramienta.disponibles === 0
+                ? { etiqueta: 'No disponible', fondo: '#fee2e2', color: '#991b1b' }
+                : disponibilidadBaja
+                  ? { etiqueta: 'Disponibilidad baja', fondo: '#ffedd5', color: '#9a3412' }
+                  : herramienta.disponibles < herramienta.total
+                    ? { etiqueta: 'Disponibilidad parcial', fondo: '#fef3c7', color: '#92400e' }
+                    : { etiqueta: 'Disponible', fondo: '#dcfce7', color: '#166534' }
+
+              return (
+                <article className='panel-page__mat-card' key={herramienta.id}>
+                  <div className='panel-page__mat-header'>
+                    <span className='panel-page__mat-name'>{herramienta.nombre}</span>
+                    <span
+                      className='panel-page__mat-alert-badge'
+                      style={{ backgroundColor: estado.fondo, color: estado.color }}
+                    >
+                      {estado.etiqueta}
+                    </span>
+                  </div>
+
+                  <p className='panel-page__mat-threshold'>
+                    {herramienta.tipo}{herramienta.ubicacion ? ` · ${herramienta.ubicacion}` : ''}
+                  </p>
+
+                  <div className='panel-page__mat-amount'>
+                    <span className='panel-page__mat-value'>{ocupadas}</span>
+                    <span className='panel-page__mat-unit'>unidades ocupadas</span>
+                  </div>
+
+                  <div
+                    className='panel-page__progress-bg'
+                    role='progressbar'
+                    aria-label={`Disponibilidad de ${herramienta.nombre}`}
+                    aria-valuenow={herramienta.disponibles}
+                    aria-valuemin={0}
+                    aria-valuemax={herramienta.total}
+                  >
+                    <div
+                      className={`panel-page__progress-bar ${herramienta.disponibles / herramienta.total <= 0.25 ? 'panel-page__progress-bar--alert' : ''}`}
+                      style={{ width: `${porcentaje}%` }}
+                    />
+                  </div>
+
+                  <div className='panel-page__mat-footer'>
+                    <span className='panel-page__mat-threshold'>
+                      Disponibles: {herramienta.disponibles}
+                    </span>
+                    <span className='panel-page__mat-capacity'>
+                      Total: {herramienta.total}
+                    </span>
+                  </div>
+                </article>
+              )
+            })}
+          </div>
+        )}
+      </div>
+
       {/* MODAL: VER DETALLE DE MÁQUINA */}
       {maquinaSeleccionada && (
         <div className='panel-page__modal-overlay' onClick={() => setMaquinaSeleccionada(null)}>
@@ -286,4 +403,3 @@ export const PanelPage = () => {
 }
 
 export default PanelPage
-
