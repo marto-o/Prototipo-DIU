@@ -9,7 +9,7 @@ import ProyectosPage from '../pages/proyectos_page'
 import MaquinasPage from '../pages/maquinas_page'
 import TurnosPage from '../pages/turnos_page'
 import MaterialesPage from '../pages/materiales_page'
-
+import HerramientasAdicionalesPage from '../pages/herramientas_adicionales_page'
 import NavBar from './nav_bar'
 import StatusBanner from './status_banner'
 
@@ -29,6 +29,8 @@ const Layout = () => {
                 <Route path='/maquinas' element={<MaquinasPage />} />
                 <Route path='/turnos' element={<TurnosPage />} />
                 <Route path='/materiales' element={<MaterialesPage />} />
+                <Route path='/herramientas-adicionales'
+                    element={<HerramientasAdicionalesPage />}/>
               </Routes>
             </div>
           </main>

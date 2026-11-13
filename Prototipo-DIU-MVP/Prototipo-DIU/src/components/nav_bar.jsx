@@ -7,7 +7,9 @@ const LINKS = [
   { to: '/proyectos', label: 'Cola y traspaso de turno' },
   { to: '/maquinas', label: 'Estado de máquinas' },
   { to: '/turnos', label: 'Turnos de ayudantes' },
-  { to: '/materiales', label: 'Materiales y stock' }
+  { to: '/materiales', label: 'Materiales y stock' },
+  { to: '/herramientas-adicionales', label: 'Herramientas adicionales' }
+
 ]
 
 export const NavBar = () => {
