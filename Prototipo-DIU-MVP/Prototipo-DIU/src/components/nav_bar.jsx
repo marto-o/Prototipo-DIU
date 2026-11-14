@@ -1,32 +1,49 @@
+
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-const LINKS = [
-  { to: '/', label: 'Panel de disponibilidad' },
-  { to: '/reservas', label: 'Reservas semanales' },
-  { to: '/proyectos', label: 'Cola y traspaso de turno' },
-  { to: '/maquinas', label: 'Estado de máquinas' },
-  { to: '/turnos', label: 'Turnos de ayudantes' },
-  { to: '/materiales', label: 'Materiales y stock' },
-  { to: '/herramientas-adicionales', label: 'Herramientas adicionales' }
-
+const NAV_ITEMS = [
+  { path: '/', label: 'Panel de disponibilidad', end: true },
+  { path: '/reservas', label: 'Reservas semanales' },
+  { path: '/proyectos', label: 'Cola de proyectos' },
+  { path: '/maquinas', label: 'Máquinas' },
+  { path: '/turnos', label: 'Turnos de ayudantes' },
+  { path: '/materiales', label: 'Materiales y stock' },
+  {
+    path: '/herramientas-adicionales',
+    label: 'Herramientas adicionales'
+  }
 ]
 
-export const NavBar = () => {
-  const navLinkClass = ({ isActive }) => {
-    const classes = ['nav-bar__link']
-    if (isActive) classes.push('nav-bar__link--active')
-    return classes.join(' ')
-  }
+const NavBar = ({ isOpen = false, onNavigate = () => {} }) => {
   return (
-    <nav className='nav-bar'>
+    <nav
+      id='main-navigation'
+      className={`nav-bar ${isOpen ? 'nav-bar--open' : ''}`}
+      aria-label='Navegación principal'
+    >
       <div className='nav-bar__brand'>
-        <span className='nav-bar__brand-name'>FabLab USM</span>
-        <span className='nav-bar__brand-sub'>Gestión de flujo de trabajo</span>
+        <span className='nav-bar__brand-name'>
+          FabLab USM
+        </span>
+        <span className='nav-bar__brand-sub'>
+          Sistema de gestión
+        </span>
       </div>
-      {LINKS.map(link => (
-        <NavLink key={link.to} className={navLinkClass} to={link.to} end>
-          {link.label}
+
+      {NAV_ITEMS.map((item) => (
+        <NavLink
+          key={item.path}
+          to={item.path}
+          end={item.end}
+          onClick={onNavigate}
+          className={({ isActive }) =>
+            `nav-bar__link ${
+              isActive ? 'nav-bar__link--active' : ''
+            }`
+          }
+        >
+          {item.label}
         </NavLink>
       ))}
     </nav>

@@ -61,7 +61,7 @@ export const MAQUINAS_INICIALES = [
     responsable: null,
     restante: null,
     motivo: 'Falla en el husillo, se esperan repuestos del proveedor.',
-    vuelta: '2026-11-02'
+    vuelta: '2026-12-25'
   }
 ]
 

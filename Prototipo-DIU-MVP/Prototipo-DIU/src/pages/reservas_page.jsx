@@ -90,9 +90,9 @@ export const ReservasPage = () => {
           <span className='reservas-page__indicador-detalle'>{maquina.modelo} · {maquina.sala}</span>
         </div>
         <div className='reservas-page__indicador-estado'>
-          <span className={`reservas-page__chip-estado reservas-page__chip-estado--${maquina.estado}`}>
-            ● <StatusBadge estado={maquina.estado} size='lg' />
-          </span>
+          <StatusBadge
+            estado={maquina.estado} size='lg'
+          />
         </div>
       </div>
 
